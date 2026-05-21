@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Fonts Preview - Drake Said</title>
+    <style>
+        /* All Font Face Declarations */
+        
+        /* Header Fonts */
+        @font-face {
+            font-family: 'Amonk Outline';
+            src: url('fonts/amonk/Amonk Outline.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Amonk';
+            src: url('fonts/amonk/Amonk.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Amonk Blood';
+            src: url('fonts/amonk/Amonk Blood.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Amonk Ice';
+            src: url('fonts/amonk/Amonk Ice-SVG.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Combat Sport';
+            src: url('fonts/combat_sport/Combat Sport.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Drake Viewz';
+            src: url('fonts/drake_viewz/DrakeViewz-Regular.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Iced Latte';
+            src: url('fonts/iced_latte/Iced Latte.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Ice Princess';
+            src: url('fonts/iceprincess/IcePrincess.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Organical';
+            src: url('fonts/organical/ORGANICAL PERSONAL USE.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Playfair Display';
+            src: url('fonts/playfair/static/PlayfairDisplay-Regular.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Playfair Display Bold';
+            src: url('fonts/playfair/static/PlayfairDisplay-Bold.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Playfair Display Black';
+            src: url('fonts/playfair/static/PlayfairDisplay-Black.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Top View';
+            src: url('fonts/top_view/Top View.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Winter Ice';
+            src: url('fonts/winterice/WinterIce.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Raven Spike';
+            src: url('fonts/raven_spike/RavenSpike.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Tabaki';
+            src: url('fonts/tabaki/Tabaki.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Velschedule Time';
+            src: url('fonts/velschedule_time/Velschedule Time.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Wancine';
+            src: url('fonts/wancine/Wancine.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'White Cloth';
+            src: url('fonts/white_cloth/White Cloth.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Wonderful Islands';
+            src: url('fonts/wonderful_islands/Wonderful Islands.otf') format('opentype');
+        }
+        @font-face {
+            font-family: 'Zabcame';
+            src: url('fonts/zabcame/Zabcame.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Zaberro';
+            src: url('fonts/zaberro/Zaberro.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Zabito';
+            src: url('fonts/zabito/Zabito.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Zadoken';
+            src: url('fonts/zadoken/Zadoken.ttf') format('truetype');
+        }
+
+        /* Lyrics & Title Fonts */
+        @font-face {
+            font-family: 'Xanh Mono';
+            src: url('fonts/lyrics/XanhMono-Regular.ttf') format('truetype');
+        }
+        @font-face {
+            font-family: 'Moonscape';
+            src: url('fonts/title/Moonscape Demo.otf') format('opentype');
+        }
+
+        /* Page Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .font-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .font-sample {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .font-sample:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .font-name {
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .font-display {
+            font-size: 30px;
+            color: #1a1a1a;
+            text-align: center;
+            padding: 15px 0;
+        }
+
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            color: #856404;
+        }
+
+        .usage-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-left: 8px;
+        }
+
+        .badge-header {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .badge-lyrics {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .badge-title {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Drake Said - Font Library</h1>
+        
+        <div class="note">
+            <strong>Font Usage Guide:</strong><br>
+            • <strong>Header Fonts:</strong> Used in the animated "Drake Said" heading<br>
+            • <strong>Lyrics Font:</strong> Xanh Mono - Used for displaying song lyrics<br>
+            • <strong>Title Font:</strong> Moonscape - Used for song titles
+        </div>
+
+        <!-- Lyrics & Title Fonts -->
+        <div class="section">
+            <h2 class="section-title">Selected Fonts (In Use)</h2>
+            <div class="font-grid">
+                <div class="font-sample">
+                    <div class="font-name">
+                        Xanh Mono
+                        <span class="usage-badge badge-lyrics">Lyrics</span>
+                    </div>
+                    <div class="font-display" style="font-family: 'Xanh Mono', monospace;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">
+                        Moonscape
+                        <span class="usage-badge badge-title">Song Titles</span>
+                    </div>
+                    <div class="font-display" style="font-family: 'Moonscape', sans-serif;">Drake Said</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header Animation Fonts -->
+        <div class="section">
+            <h2 class="section-title">Header Animation Fonts (Currently Active)</h2>
+            <div class="font-grid">
+                <div class="font-sample">
+                    <div class="font-name">
+                        Amonk Outline
+                        <span class="usage-badge badge-header">Header</span>
+                    </div>
+                    <div class="font-display" style="font-family: 'Amonk Outline', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">
+                        Combat Sport
+                        <span class="usage-badge badge-header">Header</span>
+                    </div>
+                    <div class="font-display" style="font-family: 'Combat Sport', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">
+                        Drake Viewz
+                        <span class="usage-badge badge-header">Header</span>
+                    </div>
+                    <div class="font-display" style="font-family: 'Drake Viewz', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">
+                        Iced Latte
+                        <span class="usage-badge badge-header">Header</span>
+                    </div>
+                    <div class="font-display" style="font-family: 'Iced Latte', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">
+                        Ice Princess
+                        <span class="usage-badge badge-header">Header</span>
+                    </div>
+                    <div class="font-display" style="font-family: 'Ice Princess', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">
+                        Organical
+                        <span class="usage-badge badge-header">Header</span>
+                    </div>
+                    <div class="font-display" style="font-family: 'Organical', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">
+                        Playfair Display
+                        <span class="usage-badge badge-header">Header</span>
+                    </div>
+                    <div class="font-display" style="font-family: 'Playfair Display', serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">
+                        Playfair Display Bold
+                        <span class="usage-badge badge-header">Header</span>
+                    </div>
+                    <div class="font-display" style="font-family: 'Playfair Display Bold', serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">
+                        Playfair Display Black
+                        <span class="usage-badge badge-header">Header</span>
+                    </div>
+                    <div class="font-display" style="font-family: 'Playfair Display Black', serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">
+                        Top View
+                        <span class="usage-badge badge-header">Header</span>
+                    </div>
+                    <div class="font-display" style="font-family: 'Top View', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">
+                        Winter Ice
+                        <span class="usage-badge badge-header">Header</span>
+                    </div>
+                    <div class="font-display" style="font-family: 'Winter Ice', sans-serif;">Drake Said</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Available Fonts (Not Yet Used) -->
+        <div class="section">
+            <h2 class="section-title">Available Fonts (Not Yet Added to Header)</h2>
+            <div class="font-grid">
+                <div class="font-sample">
+                    <div class="font-name">Amonk (Regular)</div>
+                    <div class="font-display" style="font-family: 'Amonk', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">Amonk Blood</div>
+                    <div class="font-display" style="font-family: 'Amonk Blood', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">Amonk Ice</div>
+                    <div class="font-display" style="font-family: 'Amonk Ice', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">Raven Spike</div>
+                    <div class="font-display" style="font-family: 'Raven Spike', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">Tabaki</div>
+                    <div class="font-display" style="font-family: 'Tabaki', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">Velschedule Time</div>
+                    <div class="font-display" style="font-family: 'Velschedule Time', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">Wancine</div>
+                    <div class="font-display" style="font-family: 'Wancine', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">White Cloth</div>
+                    <div class="font-display" style="font-family: 'White Cloth', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">Wonderful Islands</div>
+                    <div class="font-display" style="font-family: 'Wonderful Islands', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">Zabcame</div>
+                    <div class="font-display" style="font-family: 'Zabcame', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">Zaberro</div>
+                    <div class="font-display" style="font-family: 'Zaberro', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">Zabito</div>
+                    <div class="font-display" style="font-family: 'Zabito', sans-serif;">Drake Said</div>
+                </div>
+
+                <div class="font-sample">
+                    <div class="font-name">Zadoken</div>
+                    <div class="font-display" style="font-family: 'Zadoken', sans-serif;">Drake Said</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
