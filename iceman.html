@@ -225,7 +225,7 @@
     </header>
 
     <nav class="album-nav">
-        <img src="iceman_cover.png" alt="Iceman" class="active">
+        <img src="covers/iceman_cover.png" alt="Iceman" class="active">
     </nav>
 
     <main>
@@ -245,6 +245,40 @@
 </body>
 </html>
     <script>
+        // Extract dominant color from album cover and set background
+        function extractColorFromImage(imgElement) {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = imgElement.naturalWidth;
+            canvas.height = imgElement.naturalHeight;
+            
+            ctx.drawImage(imgElement, 0, 0);
+            
+            try {
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
+                
+                let r = 0, g = 0, b = 0;
+                const sampleSize = 10;
+                
+                for (let i = 0; i < data.length; i += 4 * sampleSize) {
+                    r += data[i];
+                    g += data[i + 1];
+                    b += data[i + 2];
+                }
+                
+                const pixels = data.length / (4 * sampleSize);
+                r = Math.floor(r / pixels);
+                g = Math.floor(g / pixels);
+                b = Math.floor(b / pixels);
+                
+                // Set body background to extracted color
+                document.body.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+            } catch (e) {
+                console.error('Could not extract color:', e);
+            }
+        }
+
         // Initialize Lenis smooth scroll
         const lenis = new Lenis({
             duration: 1.2,
@@ -292,6 +326,16 @@
 
         // GSAP Animations on page load
         window.addEventListener('load', () => {
+            // Extract color from album cover
+            const albumCover = document.querySelector('.album-nav img');
+            if (albumCover.complete) {
+                extractColorFromImage(albumCover);
+            } else {
+                albumCover.addEventListener('load', () => {
+                    extractColorFromImage(albumCover);
+                });
+            }
+
             // Create animation timeline
             const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
