@@ -1,0 +1,19 @@
+---
+interface Props {
+  spotify?: string;
+  youtube?: string;
+  apple?: string;
+}
+
+const {
+  spotify = 'https://open.spotify.com/artist/3TVXtAsR1lmumwmvQ5VfCt',
+  youtube = 'https://www.youtube.com/@Drake',
+  apple = 'https://music.apple.com/us/artist/drake/271256',
+} = Astro.props;
+---
+
+<nav class="music-links" aria-label="Streaming links">
+  <a href={spotify} target="_blank" rel="noopener noreferrer">Spotify</a>
+  <a href={youtube} target="_blank" rel="noopener noreferrer">YouTube</a>
+  <a href={apple} target="_blank" rel="noopener noreferrer">Apple Music</a>
+</nav>

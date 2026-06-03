@@ -1,0 +1,79 @@
+@font-face {
+  font-family: 'Xanh Mono';
+  src: url('/fonts/lyrics/XanhMono-Regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Moonscape';
+  src: url('/fonts/title/Moonscape Demo.otf') format('opentype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/playfair/static/PlayfairDisplay-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/playfair/static/PlayfairDisplay-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Drake Viewz';
+  src: url('/fonts/drake_viewz/DrakeViewz-Regular.otf') format('opentype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Zaberro';
+  src: url('/fonts/zaberro/Zaberro.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Amonk Outline';
+  src: url('/fonts/amonk/Amonk Outline.otf') format('opentype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Combat Sport';
+  src: url('/fonts/combat_sport/Combat Sport.otf') format('opentype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Iced Latte';
+  src: url('/fonts/iced_latte/Iced Latte.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Ice Princess';
+  src: url('/fonts/iceprincess/IcePrincess.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Organical';
+  src: url('/fonts/organical/ORGANICAL PERSONAL USE.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Top View';
+  src: url('/fonts/top_view/Top View.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Winter Ice';
+  src: url('/fonts/winterice/WinterIce.ttf') format('truetype');
+  font-display: swap;
+}

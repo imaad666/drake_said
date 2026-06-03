@@ -1,0 +1,11 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import AlbumGrid from '../components/AlbumGrid';
+import { albums } from '../lib/albums';
+---
+
+<BaseLayout title="DRAKE SAID" bodyClass="home-page">
+  <SiteHeader />
+  <AlbumGrid client:load albums={albums} />
+</BaseLayout>

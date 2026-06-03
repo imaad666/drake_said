@@ -1,0 +1,50 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/fonts.css';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  theme?: {
+    accent?: string;
+    background?: string;
+    text?: string;
+    muted?: string;
+    mode?: 'dark' | 'light';
+  };
+  bodyClass?: string;
+}
+
+const {
+  title = 'DRAKE SAID',
+  theme,
+  bodyClass = '',
+} = Astro.props;
+
+const styleVars = theme
+  ? {
+      '--accent': theme.accent,
+      '--album-bg': theme.background,
+      '--text': theme.text,
+      '--muted': theme.muted,
+      '--bg': theme.mode === 'light' ? '#fafafa' : '#0a0a0a',
+    }
+  : {};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content={theme?.mode === 'light' ? '#fafafa' : '#0a0a0a'} />
+    <title>{title}</title>
+    <ClientRouter />
+  </head>
+  <body class={bodyClass} style={styleVars} transition:animate="fade">
+    <slot />
+  </body>
+</html>

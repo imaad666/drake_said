@@ -1,0 +1,13 @@
+---
+interface Props {
+  homeHref?: string;
+}
+
+const { homeHref = '/' } = Astro.props;
+---
+
+<header class="site-header" transition:persist="site-header">
+  <h1>
+    <a href={homeHref}>DRAKE SAID</a>
+  </h1>
+</header>

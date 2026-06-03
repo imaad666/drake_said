@@ -1,0 +1,12 @@
+---
+interface Props {
+  showGlow?: boolean;
+}
+
+const { showGlow = true } = Astro.props;
+---
+
+<div class="album-bg" aria-hidden="true"></div>
+{showGlow && <div class="album-bg__glow" aria-hidden="true"></div>}
+<div class="album-bg__noise" aria-hidden="true"></div>
+<div class="sparkle" aria-hidden="true"></div>
