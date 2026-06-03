@@ -1,13 +1,51 @@
-# drake_said
+# Drake Said (drizzy)
 
-## Font Usage
+Quote gallery inspired by [drakesaid.com](https://drakesaid.com), rebuilt with **Astro 6**, **React islands**, **GSAP**, **Lenis**, and **View Transitions**.
 
-### Global Fonts
-- **Lyrics**: Xanh Mono Regular
-- **Song Titles**: Moonscape Demo
-- **Header Animation**: Cycles through 11 fonts (Amonk Outline, Combat Sport, Drake Viewz, Iced Latte, Ice Princess, Organical, Playfair Display variants, Top View, Winter Ice)
+## Stack
 
-### Album-Specific Fonts
-- **Views**: Drake Viewz
-- **Iceman**: Zaberro for album name
+- **Astro** — layouts, static album routes, client router for smooth navigations
+- **React** — `AlbumStrip`, `QuoteHero`, `AlbumGrid`, scroll + enter animations
+- **GSAP** — page enter timelines, grid stagger, strip animations
+- **Lenis** — smooth scroll on album pages
 
+## Commands
+
+```bash
+npm install
+npm run dev      # http://localhost:4321
+npm run build
+npm run preview
+```
+
+## Routes
+
+| Path | Page |
+|------|------|
+| `/` | Album grid (home) |
+| `/iceman` | Iceman quote view (matches inspo layout) |
+| `/{album-slug}` | Any album in `src/lib/albums.ts` |
+
+## Project layout
+
+```
+src/
+  components/     # Reusable UI (strip, hero, grid, lenis)
+  layouts/        # BaseLayout + theme CSS variables
+  lib/albums.ts   # Album metadata + quotes (edit here)
+  pages/          # index + [album] template
+public/
+  covers/ → ../covers
+  fonts/  → ../fonts
+```
+
+## Fonts
+
+- **Brand**: Playfair Display
+- **Lyrics**: Xanh Mono
+- **Song titles**: Moonscape
+- **Iceman accent**: Zaberro (per README album notes)
+
+2026 trilogy albums: **Habibti** (`/habibti`), **Iceman** (`/iceman`), **Maid of Honour** (`/maid-of-honour`).
+
+Legacy static HTML (`index.html`, `iceman.html`) remains in the repo root for reference.
