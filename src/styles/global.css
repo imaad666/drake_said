@@ -98,12 +98,21 @@ img {
   padding: 2rem 1rem 1rem;
 }
 
+.site-header__title,
 .site-header h1 {
   font-family: var(--font-brand);
   font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: 0.2em;
   text-transform: uppercase;
+  line-height: 1.2;
+  min-height: 1.2em;
+}
+
+.site-header__title--cycle a {
+  font-weight: 400;
+  display: inline-block;
+  transition: opacity 0.15s ease;
 }
 
 .site-header a:hover {
@@ -216,8 +225,34 @@ img {
   color: #1a1a1a;
 }
 
+.home-page .site-header__title,
 .home-page .site-header h1 {
   color: #1a1a1a;
+}
+
+/* Blur everything except the hovered album cover */
+.home-page .site-header,
+.home-page .album-grid__item {
+  transition:
+    filter 0.5s var(--ease-out-expo),
+    opacity 0.5s var(--ease-out-expo);
+}
+
+.home-page .album-grid__item {
+  position: relative;
+  z-index: 0;
+}
+
+.home-page:has(.album-grid__item:hover) .site-header,
+.home-page:has(.album-grid__item:hover) .album-grid__item:not(:hover) {
+  filter: blur(12px);
+  opacity: 0.45;
+}
+
+.home-page .album-grid__item:hover {
+  z-index: 2;
+  filter: none;
+  opacity: 1;
 }
 
 .album-grid {
@@ -274,5 +309,11 @@ img {
   ::view-transition-old(*),
   ::view-transition-new(*) {
     animation: none !important;
+  }
+
+  .home-page:has(.album-grid__item:hover) .site-header,
+  .home-page:has(.album-grid__item:hover) .album-grid__item:not(:hover) {
+    filter: none;
+    opacity: 1;
   }
 }

@@ -1,13 +1,26 @@
 ---
+import AnimatedHeader from './AnimatedHeader';
+
 interface Props {
   homeHref?: string;
+  /** Cycle through display fonts (home page). */
+  cycleFonts?: boolean;
 }
 
-const { homeHref = '/' } = Astro.props;
+const { homeHref = '/', cycleFonts = false } = Astro.props;
 ---
 
-<header class="site-header" transition:persist="site-header">
-  <h1>
-    <a href={homeHref}>DRAKE SAID</a>
-  </h1>
+<header
+  class="site-header"
+  transition:persist={cycleFonts ? 'header-home' : 'header-album'}
+>
+  {
+    cycleFonts ? (
+      <AnimatedHeader client:load homeHref={homeHref} />
+    ) : (
+      <h1 class="site-header__title">
+        <a href={homeHref}>DRAKE SAID</a>
+      </h1>
+    )
+  }
 </header>

@@ -25,6 +25,18 @@
 }
 
 @font-face {
+  font-family: 'Playfair Display Bold';
+  src: url('/fonts/playfair/static/PlayfairDisplay-Bold.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Playfair Display Black';
+  src: url('/fonts/playfair/static/PlayfairDisplay-Black.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Drake Viewz';
   src: url('/fonts/drake_viewz/DrakeViewz-Regular.otf') format('opentype');
   font-display: swap;

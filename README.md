@@ -41,10 +41,11 @@ public/
 
 ## Fonts
 
-- **Brand**: Playfair Display
+- **Home header**: cycles every 500ms through 11 display fonts (`src/lib/headerFonts.ts`) — Amonk Outline, Combat Sport, Drake Viewz, Iced Latte, Ice Princess, Organical, Playfair Display (regular / bold / black), Top View, Winter Ice
+- **Album header**: Playfair Display (stable)
 - **Lyrics**: Xanh Mono
 - **Song titles**: Moonscape
-- **Iceman accent**: Zaberro (per README album notes)
+- **Iceman accent**: Zaberro
 
 2026 trilogy albums: **Habibti** (`/habibti`), **Iceman** (`/iceman`), **Maid of Honour** (`/maid-of-honour`).
 
