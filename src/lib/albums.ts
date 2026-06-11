@@ -376,19 +376,24 @@ export const albums: AlbumRecord[] = [
 export const albumBySlug = new Map(albums.map((a) => [a.slug, a]));
 
 export const navAlbumSlugs = [
+  'so-far-gone',
   'thank-me-later',
   'take-care',
   'nothing-was-the-same',
+  'iyrtitl',
+  'what-a-time-to-be-alive',
   'views',
   'more-life',
-  'habibti',
-  'iceman',
-  'maid-of-honour',
   'scorpion',
   'dark-lane-demo-tapes',
   'certified-lover-boy',
   'honestly-nevermind',
+  'her-loss',
   'for-all-the-dogs',
+  'scary-hours',
+  'habibti',
+  'iceman',
+  'maid-of-honour',
 ] as const;
 
 export function getNavAlbums(): AlbumRecord[] {
