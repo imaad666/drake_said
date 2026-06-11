@@ -55,10 +55,6 @@ img {
   animation-duration: 0.55s;
 }
 
-.site-header {
-  view-transition-name: site-header;
-}
-
 .album-strip {
   view-transition-name: album-strip;
 }

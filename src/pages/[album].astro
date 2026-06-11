@@ -25,7 +25,7 @@ const title = `${album.name} — Drake Said`;
   <LenisScroll client:only="react" transition:persist />
   <PageEnter client:only="react" />
   <AlbumBackground />
-  <SiteHeader transition:persist />
+  <SiteHeader />
   <AlbumStrip client:load albums={navAlbums} activeSlug={album.slug} transition:persist="album-strip" />
   <QuoteHero client:load quote={quote} albumSlug={album.slug} />
 </BaseLayout>
