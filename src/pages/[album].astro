@@ -22,10 +22,10 @@ const title = `${album.name} — Drake Said`;
 ---
 
 <BaseLayout title={title} theme={album.theme} bodyClass="album-page">
-  <LenisScroll client:only="react" />
+  <LenisScroll client:only="react" transition:persist />
   <PageEnter client:only="react" />
   <AlbumBackground />
-  <SiteHeader />
-  <AlbumStrip client:load albums={navAlbums} activeSlug={album.slug} />
+  <SiteHeader transition:persist />
+  <AlbumStrip client:load albums={navAlbums} activeSlug={album.slug} transition:persist="album-strip" />
   <QuoteHero client:load quote={quote} albumSlug={album.slug} />
 </BaseLayout>
