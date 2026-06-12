@@ -12,7 +12,7 @@
   position: sticky;
   top: 0;
   align-self: start;
-  height: 100vh;
+  height: 100dvh;
   padding: 1.5rem 0 2rem clamp(0.75rem, 2vw, 1.5rem);
   overflow-y: auto;
   scrollbar-width: none;
@@ -88,7 +88,7 @@ html:has(body.album-page--tracks) {
 }
 
 .track-section__title {
-  font-family: var(--font-song);
+  font-family: var(--font-accent, var(--font-song));
   font-size: clamp(0.8rem, 1.8vw, 0.95rem);
   font-weight: 400;
   letter-spacing: 0.14em;

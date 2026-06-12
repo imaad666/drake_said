@@ -28,13 +28,14 @@ const title = `${album.name} — Drake Said`;
 <BaseLayout
   title={title}
   theme={album.theme}
+  fonts={album.fonts}
   bodyClass={hasTracks ? 'album-page album-page--tracks' : 'album-page'}
 >
   {!hasTracks && <LenisScroll client:only="react" transition:persist />}
   <PageEnter client:only="react" />
   <AlbumBackground />
   <SiteHeader />
-  <AlbumStrip client:load albums={navAlbums} activeSlug={album.slug} transition:persist="album-strip" />
+  <AlbumStrip client:load albums={navAlbums} activeSlug={album.slug} />
   {
     hasTracks ? (
       <AlbumTrackScroll client:load albumSlug={album.slug} tracks={tracks} />

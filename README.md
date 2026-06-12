@@ -43,11 +43,17 @@ public/
 
 ## Fonts
 
-- **Home header**: cycles every 500ms through 11 display fonts (`src/lib/headerFonts.ts`) — Amonk Outline, Combat Sport, Drake Viewz, Iced Latte, Ice Princess, Organical, Playfair Display (regular / bold / black), Top View, Winter Ice
-- **Album header**: Playfair Display (stable)
-- **Lyrics**: Xanh Mono
-- **Song titles**: Moonscape
-- **Iceman accent**: Zaberro
+- **Home header**: cycles every 500ms through 11 display fonts (`src/lib/headerFonts.ts`)
+- **Album header** (“DRAKE SAID”): Playfair Display
+- **Lyrics**: Xanh Mono — set per album via `album.fonts.lyrics`
+- **Song titles**: Moonscape — `album.fonts.songTitle`
+- **Album accent** (track/song labels): e.g. Zaberro on Iceman — `album.fonts.albumTitle`
+
+## Lyrics view navigation
+
+- **Switch albums**: use the **cover strip** below the header (scroll back to top on track pages)
+- **Switch tracks** (Iceman): scroll (snaps per track) or use the **vertical track list** on the left
+- **Home**: click “DRAKE SAID” or go to `/`
 
 2026 trilogy albums: **Habibti** (`/habibti`), **Iceman** (`/iceman`), **Maid of Honour** (`/maid-of-honour`).
 

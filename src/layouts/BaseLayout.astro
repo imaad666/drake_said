@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from 'astro:transitions';
+import { fontFamilyCss } from '../lib/fonts';
 import '../styles/fonts.css';
 import '../styles/global.css';
 
@@ -12,24 +13,35 @@ interface Props {
     muted?: string;
     mode?: 'dark' | 'light';
   };
+  fonts?: {
+    lyrics?: string;
+    songTitle?: string;
+    albumTitle?: string;
+  };
   bodyClass?: string;
 }
 
 const {
   title = 'DRAKE SAID',
   theme,
+  fonts,
   bodyClass = '',
 } = Astro.props;
 
-const styleVars = theme
-  ? {
-      '--accent': theme.accent,
-      '--album-bg': theme.background,
-      '--text': theme.text,
-      '--muted': theme.muted,
-      '--bg': theme.mode === 'light' ? '#fafafa' : '#0a0a0a',
-    }
-  : {};
+const styleVars = {
+  ...(theme
+    ? {
+        '--accent': theme.accent,
+        '--album-bg': theme.background,
+        '--text': theme.text,
+        '--muted': theme.muted,
+        '--bg': theme.mode === 'light' ? '#fafafa' : '#0a0a0a',
+      }
+    : {}),
+  ...(fonts?.lyrics ? { '--font-lyrics': fontFamilyCss(fonts.lyrics) } : {}),
+  ...(fonts?.songTitle ? { '--font-song': fontFamilyCss(fonts.songTitle) } : {}),
+  ...(fonts?.albumTitle ? { '--font-accent': fontFamilyCss(fonts.albumTitle) } : {}),
+};
 ---
 
 <!doctype html>

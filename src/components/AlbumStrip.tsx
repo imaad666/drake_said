@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-import gsap from 'gsap';
+import { useEffect, useRef } from 'react';
 import type { AlbumRecord } from '../lib/types';
 import '../styles/album-strip.css';
 
@@ -10,29 +9,6 @@ type Props = {
 
 export default function AlbumStrip({ albums, activeSlug }: Props) {
   const stripRef = useRef<HTMLElement>(null);
-  const [hasAnimated, setHasAnimated] = useState(false);
-
-  // Only animate on first mount
-  useEffect(() => {
-    const strip = stripRef.current;
-    if (!strip || hasAnimated) return;
-
-    const links = strip.querySelectorAll('.album-strip__link');
-    gsap.fromTo(
-      links,
-      { opacity: 0, y: 12, scale: 0.92 },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.55,
-        stagger: 0.04,
-        ease: 'power3.out',
-        delay: 0.15,
-        onComplete: () => setHasAnimated(true),
-      },
-    );
-  }, [hasAnimated]);
 
   // Scroll to active album when it changes
   useEffect(() => {

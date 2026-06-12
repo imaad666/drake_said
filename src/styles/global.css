@@ -8,8 +8,7 @@
   --font-song: 'Moonscape', system-ui, sans-serif;
   --font-brand: 'Playfair Display', Georgia, serif;
   --font-ui: system-ui, -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --header-height: 72px;
-  --strip-height: 96px;
+  --font-accent: var(--font-song);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -54,10 +53,6 @@ img {
 ::view-transition-old(album-hero),
 ::view-transition-new(album-hero) {
   animation-duration: 0.55s;
-}
-
-.album-strip {
-  view-transition-name: album-strip;
 }
 
 .album-bg {
@@ -141,7 +136,7 @@ img {
 }
 
 .album-hero__song {
-  font-family: var(--font-song);
+  font-family: var(--font-accent, var(--font-song));
   font-size: clamp(0.85rem, 2vw, 1.1rem);
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -190,36 +185,6 @@ img {
   background: var(--text);
   color: var(--bg);
   transform: translateY(-2px);
-}
-
-.sparkle {
-  position: fixed;
-  right: 1.5rem;
-  bottom: 1.5rem;
-  width: 1.25rem;
-  height: 1.25rem;
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-.sparkle::before {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: var(--text);
-  clip-path: polygon(
-    50% 0%,
-    61% 35%,
-    98% 35%,
-    68% 57%,
-    79% 91%,
-    50% 70%,
-    21% 91%,
-    32% 57%,
-    2% 35%,
-    39% 35%
-  );
 }
 
 /* Home grid */
