@@ -66,8 +66,8 @@ export default function AlbumTrackScroll({ albumSlug, tracks }: Props) {
       triggers.push(
         ScrollTrigger.create({
           trigger: section,
-          start: 'top center',
-          end: 'bottom center',
+          start: 'top 45%',
+          end: 'bottom 45%',
           onEnter: () => slug && setActiveSlug(slug),
           onEnterBack: () => slug && setActiveSlug(slug),
         }),
@@ -93,7 +93,7 @@ export default function AlbumTrackScroll({ albumSlug, tracks }: Props) {
   const scrollToTrack = (slug: string) => {
     const el = rootRef.current?.querySelector<HTMLElement>(`#${CSS.escape(slug)}`);
     if (!el) return;
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    el.scrollIntoView({ behavior: 'instant', block: 'start' });
     history.replaceState(null, '', `#${slug}`);
     setActiveSlug(slug);
   };

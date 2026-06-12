@@ -68,12 +68,18 @@
   width: 100%;
 }
 
+html:has(body.album-page--tracks) {
+  scroll-snap-type: y mandatory;
+}
+
 .track-section {
-  min-height: 100vh;
+  height: 100dvh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   display: flex;
   align-items: center;
   padding: 4rem clamp(1.25rem, 5vw, 4rem) 4rem 1rem;
-  scroll-margin-top: 0;
+  box-sizing: border-box;
 }
 
 .track-section__inner {
@@ -143,6 +149,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html:has(body.album-page--tracks) {
+    scroll-snap-type: none;
+  }
+
   .track-section__title,
   .track-section__line {
     opacity: 1 !important;

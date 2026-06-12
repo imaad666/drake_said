@@ -30,7 +30,7 @@ const title = `${album.name} — Drake Said`;
   theme={album.theme}
   bodyClass={hasTracks ? 'album-page album-page--tracks' : 'album-page'}
 >
-  <LenisScroll client:only="react" transition:persist />
+  {!hasTracks && <LenisScroll client:only="react" transition:persist />}
   <PageEnter client:only="react" />
   <AlbumBackground />
   <SiteHeader />
