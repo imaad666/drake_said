@@ -7,6 +7,7 @@
   --font-lyrics: 'Xanh Mono', ui-monospace, monospace;
   --font-song: 'Moonscape', system-ui, sans-serif;
   --font-brand: 'Playfair Display', Georgia, serif;
+  --font-ui: system-ui, -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --header-height: 72px;
   --strip-height: 96px;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -146,6 +147,13 @@ img {
   text-transform: uppercase;
   color: var(--muted);
   margin-bottom: 1.25rem;
+}
+
+.album-hero__feat {
+  text-transform: none;
+  letter-spacing: 0.04em;
+  font-weight: 400;
+  opacity: 0.75;
 }
 
 .album-hero__line {

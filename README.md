@@ -23,7 +23,8 @@ npm run preview
 | Path | Page |
 |------|------|
 | `/` | Album grid (home) |
-| `/iceman` | Iceman quote view (matches inspo layout) |
+| `/iceman` | Vertical scroll through all 18 tracks |
+| `/iceman/{track-slug}` | Redirects to `/iceman#{track-slug}` |
 | `/{album-slug}` | Any album in `src/lib/albums.ts` |
 
 ## Project layout
@@ -33,6 +34,7 @@ src/
   components/     # Reusable UI (strip, hero, grid, lenis)
   layouts/        # BaseLayout + theme CSS variables
   lib/albums.ts   # Album metadata + quotes (edit here)
+  lib/tracks/     # Per-album tracklists (iceman.ts → 18 tracks)
   pages/          # index + [album] template
 public/
   covers/ → ../covers

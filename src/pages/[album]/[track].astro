@@ -1,0 +1,20 @@
+---
+import { getAlbum } from '../../lib/albums';
+import { getTrack, getTrackAlbumsWithPaths } from '../../lib/tracks';
+
+export function getStaticPaths() {
+  return getTrackAlbumsWithPaths().map(({ album, track }) => ({
+    params: { album, track },
+  }));
+}
+
+const { album: albumSlug, track: trackSlug } = Astro.params;
+const album = getAlbum(albumSlug!);
+const track = getTrack(albumSlug!, trackSlug!);
+
+if (!album || !track) {
+  return Astro.redirect('/');
+}
+
+return Astro.redirect(`/${album.slug}#${track.slug}`);
+---

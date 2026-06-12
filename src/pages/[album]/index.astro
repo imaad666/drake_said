@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import AlbumBackground from '../../components/AlbumBackground.astro';
+import AlbumStrip from '../../components/AlbumStrip';
+import AlbumTrackScroll from '../../components/AlbumTrackScroll';
+import QuoteHero from '../../components/QuoteHero';
+import PageEnter from '../../components/PageEnter';
+import LenisScroll from '../../components/LenisScroll';
+import { albums, getNavAlbums, pickQuote } from '../../lib/albums';
+import { albumHasTracks, getTracksForAlbum } from '../../lib/tracks';
+
+export function getStaticPaths() {
+  return albums.map((album) => ({
+    params: { album: album.slug },
+    props: { album },
+  }));
+}
+
+const { album } = Astro.props;
+const navAlbums = getNavAlbums();
+const hasTracks = albumHasTracks(album.slug);
+const tracks = hasTracks ? getTracksForAlbum(album.slug) : [];
+const quote = hasTracks ? null : pickQuote(album);
+const title = `${album.name} — Drake Said`;
+---
+
+<BaseLayout
+  title={title}
+  theme={album.theme}
+  bodyClass={hasTracks ? 'album-page album-page--tracks' : 'album-page'}
+>
+  <LenisScroll client:only="react" transition:persist />
+  <PageEnter client:only="react" />
+  <AlbumBackground />
+  <SiteHeader />
+  <AlbumStrip client:load albums={navAlbums} activeSlug={album.slug} transition:persist="album-strip" />
+  {
+    hasTracks ? (
+      <AlbumTrackScroll client:load albumSlug={album.slug} tracks={tracks} />
+    ) : (
+      <QuoteHero
+        client:load
+        song={quote!.song}
+        lines={quote!.lines}
+        albumSlug={album.slug}
+      />
+    )
+  }
+</BaseLayout>

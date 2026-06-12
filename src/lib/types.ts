@@ -11,6 +11,14 @@ export type AlbumTheme = {
   muted: string;
 };
 
+export type Track = {
+  slug: string;
+  number: number;
+  title: string;
+  features?: string;
+  lines: string[];
+};
+
 export type AlbumRecord = {
   slug: string;
   name: string;
@@ -23,4 +31,5 @@ export type AlbumRecord = {
   };
   quotes: AlbumQuote[];
   featured?: boolean;
+  hasTracks?: boolean;
 };

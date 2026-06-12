@@ -321,6 +321,7 @@ export const albums: AlbumRecord[] = [
     name: 'Iceman',
     cover: '/covers/ice.png',
     featured: true,
+    hasTracks: true,
     theme: {
       mode: 'dark',
       accent: '#4da6ff',

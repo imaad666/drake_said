@@ -1,14 +1,15 @@
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { createEnterTimeline } from '../lib/animations/enterTimeline';
-import type { AlbumQuote } from '../lib/types';
-
 type Props = {
-  quote: AlbumQuote;
+  song: string;
+  features?: string;
+  lines: string[];
   albumSlug: string;
+  trackSlug?: string;
 };
 
-export default function QuoteHero({ quote, albumSlug }: Props) {
+export default function QuoteHero({ song, features, lines, albumSlug, trackSlug }: Props) {
   const rootRef = useRef<HTMLElement>(null);
   const songRef = useRef<HTMLParagraphElement>(null);
   const linesRef = useRef<HTMLDivElement>(null);
@@ -23,16 +24,17 @@ export default function QuoteHero({ quote, albumSlug }: Props) {
         links: linksRef.current,
       });
     },
-    { dependencies: [albumSlug, quote.song], scope: rootRef },
+    { dependencies: [albumSlug, trackSlug ?? song], scope: rootRef },
   );
 
   return (
     <section className="album-hero" ref={rootRef} aria-live="polite">
       <p className="album-hero__song" ref={songRef}>
-        {quote.song}
+        {song}
+        {features && <span className="album-hero__feat"> — feat. {features}</span>}
       </p>
       <div className="album-hero__lines" ref={linesRef}>
-        {quote.lines.map((line) => (
+        {lines.map((line) => (
           <p className="album-hero__line" key={line}>
             {line}
           </p>
