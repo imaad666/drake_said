@@ -1,0 +1,86 @@
+---
+import type { AlbumRecord } from '../lib/types';
+import '../styles/album-strip.css';
+
+interface Props {
+  albums: AlbumRecord[];
+  activeSlug: string;
+}
+
+const { albums, activeSlug } = Astro.props;
+---
+
+<nav class="album-strip" aria-label="Albums" transition:persist="album-strip">
+  {
+    albums.map((album) => {
+      const isActive = album.slug === activeSlug;
+      return (
+        <a
+          href={`/${album.slug}`}
+          class:list={['album-strip__link', { 'album-strip__link--active': isActive }]}
+          aria-current={isActive ? 'page' : undefined}
+          data-album-slug={album.slug}
+          data-astro-prefetch="load"
+        >
+          <img
+            src={album.cover}
+            alt={album.name}
+            width={64}
+            height={64}
+            loading="eager"
+            decoding="async"
+          />
+        </a>
+      );
+    })
+  }
+</nav>
+
+<script>
+  function currentAlbumSlug() {
+    const parts = window.location.pathname.replace(/\/$/, '').split('/').filter(Boolean);
+    return parts[0] ?? '';
+  }
+
+  function centerStripOnLink(link: HTMLElement) {
+    const strip = link.closest('.album-strip') as HTMLElement | null;
+    if (!strip) return;
+    const stripRect = strip.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+    const delta = linkRect.left + linkRect.width / 2 - (stripRect.left + stripRect.width / 2);
+    strip.scrollLeft += delta;
+  }
+
+  function setActiveStripSlug(slug: string) {
+    document.querySelectorAll<HTMLAnchorElement>('.album-strip__link').forEach((link) => {
+      const linkSlug = link.dataset.albumSlug ?? '';
+      const isActive = linkSlug === slug;
+      link.classList.toggle('album-strip__link--active', isActive);
+      if (isActive) {
+        link.setAttribute('aria-current', 'page');
+        centerStripOnLink(link);
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  function syncAlbumStrip() {
+    setActiveStripSlug(currentAlbumSlug());
+  }
+
+  document.addEventListener(
+    'click',
+    (e) => {
+      const link = (e.target as Element).closest?.('.album-strip__link');
+      if (!(link instanceof HTMLAnchorElement)) return;
+      const slug = link.dataset.albumSlug;
+      if (!slug) return;
+      setActiveStripSlug(slug);
+    },
+    true,
+  );
+
+  syncAlbumStrip();
+  document.addEventListener('astro:after-swap', syncAlbumStrip);
+</script>

@@ -2,11 +2,10 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import AlbumBackground from '../../components/AlbumBackground.astro';
-import AlbumStrip from '../../components/AlbumStrip';
+import AlbumStrip from '../../components/AlbumStrip.astro';
 import AlbumTrackScroll from '../../components/AlbumTrackScroll';
 import QuoteHero from '../../components/QuoteHero';
-import PageEnter from '../../components/PageEnter';
-import LenisScroll from '../../components/LenisScroll';
+import AlbumTheme from '../../components/AlbumTheme';
 import { albums, getNavAlbums, pickQuote } from '../../lib/albums';
 import { albumHasTracks, getTracksForAlbum } from '../../lib/tracks';
 
@@ -29,23 +28,33 @@ const title = `${album.name} — Drake Said`;
   title={title}
   theme={album.theme}
   fonts={album.fonts}
-  bodyClass={hasTracks ? 'album-page album-page--tracks' : 'album-page'}
+  bodyClass={`album-page${hasTracks ? ' album-page--tracks' : ''}`}
+  pageTransition={false}
 >
-  {!hasTracks && <LenisScroll client:only="react" transition:persist />}
-  <PageEnter client:only="react" />
-  <AlbumBackground />
-  <SiteHeader />
-  <AlbumStrip client:load albums={navAlbums} activeSlug={album.slug} />
-  {
-    hasTracks ? (
-      <AlbumTrackScroll client:load albumSlug={album.slug} tracks={tracks} />
-    ) : (
-      <QuoteHero
-        client:load
-        song={quote!.song}
-        lines={quote!.lines}
-        albumSlug={album.slug}
-      />
-    )
-  }
+  <AlbumTheme client:load transition:persist="album-theme" theme={album.theme} fonts={album.fonts} />
+  <AlbumBackground transition:persist="album-bg" />
+
+  <section
+    class:list={['album-chrome', hasTracks && 'album-chrome--tracks']}
+    id="album-nav"
+    aria-label="Album navigation"
+  >
+    <SiteHeader transition:persist="header-album" />
+    <AlbumStrip albums={navAlbums} activeSlug={album.slug} />
+  </section>
+
+  <div class="album-content" transition:name="album-content" transition:animate="fade">
+    {
+      hasTracks ? (
+        <AlbumTrackScroll client:load albumSlug={album.slug} tracks={tracks} />
+      ) : (
+        <QuoteHero
+          client:load
+          song={quote!.song}
+          lines={quote!.lines}
+          albumSlug={album.slug}
+        />
+      )
+    }
+  </div>
 </BaseLayout>

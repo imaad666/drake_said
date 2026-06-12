@@ -19,6 +19,8 @@ interface Props {
     albumTitle?: string;
   };
   bodyClass?: string;
+  /** false = no full-page fade (album shell persists) */
+  pageTransition?: boolean;
 }
 
 const {
@@ -26,6 +28,7 @@ const {
   theme,
   fonts,
   bodyClass = '',
+  pageTransition = true,
 } = Astro.props;
 
 const styleVars = {
@@ -56,7 +59,11 @@ const styleVars = {
     <title>{title}</title>
     <ClientRouter />
   </head>
-  <body class={bodyClass} style={styleVars} transition:animate="fade">
+  <body
+    class={bodyClass}
+    style={styleVars}
+    transition:animate={pageTransition ? 'fade' : 'none'}
+  >
     <slot />
   </body>
 </html>

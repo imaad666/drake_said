@@ -29,9 +29,10 @@ html {
 body {
   min-height: 100vh;
   font-family: var(--font-lyrics);
-  background: var(--album-bg);
+  background: transparent;
   color: var(--text);
   -webkit-font-smoothing: antialiased;
+  transition: color 0.5s var(--ease-out-expo);
 }
 
 a {
@@ -50,9 +51,22 @@ img {
   animation-timing-function: var(--ease-out-expo);
 }
 
-::view-transition-old(album-hero),
-::view-transition-new(album-hero) {
-  animation-duration: 0.55s;
+::view-transition-old(album-content),
+::view-transition-new(album-content) {
+  animation-duration: 0.38s;
+  animation-timing-function: var(--ease-out-expo);
+}
+
+/* Persisted shell — no flash on album-to-album */
+::view-transition-old(album-strip),
+::view-transition-new(album-strip),
+::view-transition-old(header-album),
+::view-transition-new(header-album),
+::view-transition-old(album-bg),
+::view-transition-new(album-bg),
+::view-transition-old(album-theme),
+::view-transition-new(album-theme) {
+  animation: none;
 }
 
 .album-bg {
@@ -60,7 +74,7 @@ img {
   inset: 0;
   z-index: -2;
   background: var(--album-bg);
-  transition: opacity 0.6s var(--ease-out-expo);
+  will-change: opacity;
 }
 
 .album-bg__glow {
@@ -69,11 +83,13 @@ img {
   z-index: -1;
   pointer-events: none;
   opacity: 0.35;
+  will-change: opacity;
   background: radial-gradient(
     ellipse 70% 50% at 50% 0%,
     color-mix(in srgb, var(--accent) 40%, transparent),
     transparent 70%
   );
+  transition: opacity 0.5s var(--ease-out-expo);
 }
 
 .album-bg__noise {
@@ -190,7 +206,7 @@ img {
 /* Home grid */
 .home-page {
   min-height: 100vh;
-  background: #fafafa;
+  background: #fafafa !important;
   color: #1a1a1a;
 }
 

@@ -1,30 +1,53 @@
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
-import { createEnterTimeline } from '../lib/animations/enterTimeline';
+import gsap from 'gsap';
+
 type Props = {
   song: string;
   features?: string;
   lines: string[];
   albumSlug: string;
-  trackSlug?: string;
 };
 
-export default function QuoteHero({ song, features, lines, albumSlug, trackSlug }: Props) {
+export default function QuoteHero({ song, features, lines, albumSlug }: Props) {
   const rootRef = useRef<HTMLElement>(null);
   const songRef = useRef<HTMLParagraphElement>(null);
   const linesRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
+  const hasEntered = useRef(
+    typeof sessionStorage !== 'undefined' && sessionStorage.getItem('album-nav') === '1',
+  );
 
   useGSAP(
     () => {
-      const lines = linesRef.current?.querySelectorAll('.album-hero__line');
-      createEnterTimeline({
-        song: songRef.current,
-        lines: lines ? Array.from(lines) : null,
-        links: linksRef.current,
-      });
+      const lineEls = linesRef.current?.querySelectorAll('.album-hero__line');
+      const targets = [songRef.current, ...(lineEls ? Array.from(lineEls) : []), linksRef.current].filter(
+        Boolean,
+      );
+
+      sessionStorage.setItem('album-nav', '1');
+
+      if (!hasEntered.current) {
+        gsap.set(targets, { opacity: 0, y: 20 });
+        gsap.to(targets, {
+          opacity: 1,
+          y: 0,
+          duration: 0.65,
+          stagger: 0.07,
+          ease: 'power3.out',
+          delay: 0.08,
+        });
+        hasEntered.current = true;
+        return;
+      }
+
+      gsap.fromTo(
+        targets,
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.45, stagger: 0.05, ease: 'power2.out' },
+      );
     },
-    { dependencies: [albumSlug, trackSlug ?? song], scope: rootRef },
+    { dependencies: [albumSlug, song], scope: rootRef },
   );
 
   return (

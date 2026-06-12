@@ -48,7 +48,7 @@ export default function AlbumGrid({ albums }: Props) {
         <div className="album-grid__item" key={album.slug}>
           <a
             href={`/${album.slug}`}
-            data-astro-prefetch
+            data-astro-prefetch="load"
             onMouseEnter={(e) => {
               const img = e.currentTarget.querySelector('img');
               if (img?.complete) handleEnter(img);

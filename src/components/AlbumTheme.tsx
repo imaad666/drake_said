@@ -28,6 +28,8 @@ function applyFonts(fonts?: Fonts) {
   if (fonts?.albumTitle) el.style.setProperty('--font-accent', fontFamilyCss(fonts.albumTitle));
 }
 
+let hasThemed = false;
+
 export default function AlbumTheme({ theme, fonts }: Props) {
   useEffect(() => {
     const root = document.documentElement;
@@ -35,6 +37,15 @@ export default function AlbumTheme({ theme, fonts }: Props) {
     const glow = document.querySelector<HTMLElement>('.album-bg__glow');
 
     applyFonts(fonts);
+
+    if (!hasThemed) {
+      hasThemed = true;
+      root.style.setProperty('--accent', theme.accent);
+      root.style.setProperty('--text', theme.text);
+      root.style.setProperty('--muted', theme.muted);
+      if (bg) bg.style.background = theme.background;
+      return;
+    }
 
     gsap.to(root, {
       '--accent': theme.accent,
@@ -69,7 +80,14 @@ export default function AlbumTheme({ theme, fonts }: Props) {
   }, [theme, fonts]);
 
   useEffect(() => {
-    const resetScroll = () => window.scrollTo({ top: 0, behavior: 'instant' });
+    const resetScroll = () => {
+      const hash = window.location.hash.slice(1);
+      if (hash) {
+        document.getElementById(hash)?.scrollIntoView({ behavior: 'instant', block: 'start' });
+        return;
+      }
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    };
     document.addEventListener('astro:after-swap', resetScroll);
     return () => document.removeEventListener('astro:after-swap', resetScroll);
   }, []);

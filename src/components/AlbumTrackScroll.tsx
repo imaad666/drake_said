@@ -20,8 +20,21 @@ export default function AlbumTrackScroll({ albumSlug, tracks }: Props) {
     if (!root) return;
 
     const sections = root.querySelectorAll<HTMLElement>('.track-section');
+    const chrome = document.getElementById('album-nav');
 
     const triggers: ScrollTrigger[] = [];
+
+    if (chrome) {
+      triggers.push(
+        ScrollTrigger.create({
+          trigger: chrome,
+          start: 'top 55%',
+          end: 'bottom 55%',
+          onEnter: () => setActiveSlug(''),
+          onEnterBack: () => setActiveSlug(''),
+        }),
+      );
+    }
 
     sections.forEach((section) => {
       const slug = section.dataset.trackSlug;
@@ -79,7 +92,7 @@ export default function AlbumTrackScroll({ albumSlug, tracks }: Props) {
       const target = root.querySelector<HTMLElement>(`#${CSS.escape(hash)}`);
       if (target) {
         requestAnimationFrame(() => {
-          target.scrollIntoView({ behavior: 'instant' });
+          target.scrollIntoView({ behavior: 'instant', block: 'start' });
           setActiveSlug(hash);
         });
       }
