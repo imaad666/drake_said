@@ -11,6 +11,7 @@ type Theme = {
 };
 
 type Fonts = {
+  brandTitle?: string;
   lyrics?: string;
   songTitle?: string;
   albumTitle?: string;
@@ -23,6 +24,11 @@ type Props = {
 
 function applyFonts(fonts?: Fonts) {
   const el = document.documentElement;
+  if (fonts?.brandTitle) {
+    el.style.setProperty('--font-brand', fontFamilyCss(fonts.brandTitle));
+  } else {
+    el.style.removeProperty('--font-brand');
+  }
   if (fonts?.lyrics) el.style.setProperty('--font-lyrics', fontFamilyCss(fonts.lyrics));
   if (fonts?.songTitle) el.style.setProperty('--font-song', fontFamilyCss(fonts.songTitle));
   if (fonts?.albumTitle) el.style.setProperty('--font-accent', fontFamilyCss(fonts.albumTitle));

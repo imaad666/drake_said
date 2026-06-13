@@ -126,7 +126,7 @@ export const albums: AlbumRecord[] = [
       text: '#e8f6fc',
       muted: 'rgba(232, 246, 252, 0.5)',
     },
-    fonts: { albumTitle: 'Drake Viewz', lyrics: 'Xanh Mono', songTitle: 'Drake Viewz' },
+    fonts: { brandTitle: 'Drake Viewz', albumTitle: 'Drake Viewz', lyrics: 'Xanh Mono', songTitle: 'Drake Viewz' },
     quotes: [
       {
         song: 'One Dance',

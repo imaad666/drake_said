@@ -25,6 +25,7 @@ export type AlbumRecord = {
   cover: string;
   theme: AlbumTheme;
   fonts: {
+    brandTitle?: string;
     albumTitle?: string;
     lyrics: string;
     songTitle: string;

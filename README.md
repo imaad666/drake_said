@@ -44,7 +44,7 @@ public/
 ## Fonts
 
 - **Home header**: cycles every 500ms through 11 display fonts (`src/lib/headerFonts.ts`)
-- **Album header** (“DRAKE SAID”): Playfair Display on quote pages; **Drake Viewz** on lyrics/track pages (Iceman)
+- **Album header** (“DRAKE SAID”): Playfair Display by default; **Drake Viewz** on Views only (`album.fonts.brandTitle`)
 - **Lyrics**: Xanh Mono — set per album via `album.fonts.lyrics`
 - **Song titles**: Moonscape — `album.fonts.songTitle`
 - **Album accent** (track/song labels): e.g. Zaberro on Iceman — `album.fonts.albumTitle`

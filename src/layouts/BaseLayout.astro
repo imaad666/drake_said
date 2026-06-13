@@ -14,6 +14,7 @@ interface Props {
     mode?: 'dark' | 'light';
   };
   fonts?: {
+    brandTitle?: string;
     lyrics?: string;
     songTitle?: string;
     albumTitle?: string;
@@ -41,6 +42,7 @@ const styleVars = {
         '--bg': theme.mode === 'light' ? '#fafafa' : '#0a0a0a',
       }
     : {}),
+  ...(fonts?.brandTitle ? { '--font-brand': fontFamilyCss(fonts.brandTitle) } : {}),
   ...(fonts?.lyrics ? { '--font-lyrics': fontFamilyCss(fonts.lyrics) } : {}),
   ...(fonts?.songTitle ? { '--font-song': fontFamilyCss(fonts.songTitle) } : {}),
   ...(fonts?.albumTitle ? { '--font-accent': fontFamilyCss(fonts.albumTitle) } : {}),
