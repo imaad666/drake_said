@@ -5,14 +5,16 @@ interface Props {
   homeHref?: string;
   /** Cycle through display fonts (home page). */
   cycleFonts?: boolean;
+  /** Persist across view transitions (album chrome persists as a unit). */
+  persist?: boolean;
 }
 
-const { homeHref = '/', cycleFonts = false } = Astro.props;
+const { homeHref = '/', cycleFonts = false, persist = true } = Astro.props;
 ---
 
 <header
   class="site-header"
-  transition:persist={cycleFonts ? 'header-home' : 'header-album'}
+  transition:persist={cycleFonts ? 'header-home' : persist ? 'header-album' : undefined}
 >
   {
     cycleFonts ? (

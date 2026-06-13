@@ -40,59 +40,38 @@ export default function AlbumTrackScroll({ albumSlug, tracks }: Props) {
       const slug = section.dataset.trackSlug;
       const title = section.querySelector('.track-section__title');
       const lines = section.querySelectorAll('.track-section__line');
-      const linesWrap = section.querySelector('.track-section__lines');
-
-      const showTitle = () => {
-        if (!title) return;
-        gsap.to(title, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', overwrite: 'auto' });
-      };
-
-      const revealLines = () => {
-        if (!lines.length) return;
-        gsap.to(lines, {
-          opacity: 1,
-          y: 0,
-          duration: 0.85,
-          stagger: 0.1,
-          ease: 'power3.out',
-          overwrite: 'auto',
-        });
-      };
-
-      const hideLines = () => {
-        if (!lines.length) return;
-        gsap.to(lines, {
-          opacity: 0,
-          y: 40,
-          duration: 0.3,
-          ease: 'power2.in',
-          overwrite: 'auto',
-        });
-      };
 
       if (title) {
         gsap.set(title, { opacity: 0, y: 32 });
         triggers.push(
           ScrollTrigger.create({
             trigger: section,
-            start: 'top top',
-            end: 'bottom top',
-            onEnter: showTitle,
-            onEnterBack: showTitle,
+            start: 'top 72%',
+            once: true,
+            onEnter: () => {
+              gsap.to(title, { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out' });
+            },
           }),
         );
       }
 
-      if (lines.length && linesWrap) {
+      if (lines.length) {
         gsap.set(lines, { opacity: 0, y: 40 });
         triggers.push(
           ScrollTrigger.create({
-            trigger: linesWrap,
-            start: 'top 78%',
-            end: 'top 40%',
-            onEnter: revealLines,
-            onEnterBack: revealLines,
-            onLeaveBack: hideLines,
+            trigger: section,
+            start: 'top 65%',
+            once: true,
+            onEnter: () => {
+              gsap.to(lines, {
+                opacity: 1,
+                y: 0,
+                duration: 0.85,
+                stagger: 0.1,
+                ease: 'power3.out',
+                delay: 0.12,
+              });
+            },
           }),
         );
       }
@@ -115,11 +94,8 @@ export default function AlbumTrackScroll({ albumSlug, tracks }: Props) {
         requestAnimationFrame(() => {
           target.scrollIntoView({ behavior: 'instant', block: 'start' });
           setActiveSlug(hash);
-          ScrollTrigger.refresh();
         });
       }
-    } else {
-      requestAnimationFrame(() => ScrollTrigger.refresh());
     }
 
     return () => {
@@ -167,22 +143,20 @@ export default function AlbumTrackScroll({ albumSlug, tracks }: Props) {
             data-track-slug={track.slug}
             aria-label={track.title}
           >
-            <div className="track-section__stage">
-              <div className="track-section__inner">
-                <h2 className="track-section__title">
-                  {track.title}
-                  {track.features && (
-                    <span className="track-section__feat">feat. {track.features}</span>
-                  )}
-                </h2>
+            <div className="track-section__inner">
+              <h2 className="track-section__title">
+                {track.title}
+                {track.features && (
+                  <span className="track-section__feat">feat. {track.features}</span>
+                )}
+              </h2>
+              <div className="track-section__lines">
+                {track.lines.map((line) => (
+                  <p className="track-section__line" key={line}>
+                    {line}
+                  </p>
+                ))}
               </div>
-            </div>
-            <div className="track-section__lines">
-              {track.lines.map((line) => (
-                <p className="track-section__line" key={line}>
-                  {line}
-                </p>
-              ))}
             </div>
           </section>
         ))}

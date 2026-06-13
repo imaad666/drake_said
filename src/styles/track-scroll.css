@@ -79,32 +79,18 @@ html:has(body.album-page--tracks) {
 }
 
 .track-section {
-  min-height: 200dvh;
+  height: 100dvh;
   scroll-snap-align: start;
   scroll-snap-stop: always;
-  padding: 0 clamp(1.25rem, 5vw, 4rem) 0 1rem;
-  box-sizing: border-box;
-}
-
-.track-section__stage {
-  min-height: 100dvh;
   display: flex;
   align-items: center;
+  padding: 4rem clamp(1.25rem, 5vw, 4rem) 4rem 1rem;
+  box-sizing: border-box;
 }
 
 .track-section__inner {
   width: 100%;
   max-width: 900px;
-}
-
-.track-section__lines {
-  width: 100%;
-  max-width: 900px;
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-bottom: 4rem;
 }
 
 .track-section__title {
@@ -165,10 +151,6 @@ html:has(body.album-page--tracks) {
 
   .track-section {
     padding-left: 0.5rem;
-  }
-
-  .track-section__lines {
-    padding-left: 0;
   }
 }
 

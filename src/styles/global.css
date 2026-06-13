@@ -60,6 +60,8 @@ img {
 /* Persisted shell — no flash on album-to-album */
 ::view-transition-old(album-strip),
 ::view-transition-new(album-strip),
+::view-transition-old(album-chrome),
+::view-transition-new(album-chrome),
 ::view-transition-old(header-album),
 ::view-transition-new(header-album),
 ::view-transition-old(album-bg),

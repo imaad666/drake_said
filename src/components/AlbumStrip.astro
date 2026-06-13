@@ -10,7 +10,7 @@ interface Props {
 const { albums, activeSlug } = Astro.props;
 ---
 
-<nav class="album-strip" aria-label="Albums" transition:persist="album-strip">
+<nav class="album-strip" aria-label="Albums">
   {
     albums.map((album) => {
       const isActive = album.slug === activeSlug;
@@ -37,9 +37,35 @@ const { albums, activeSlug } = Astro.props;
 </nav>
 
 <script>
+  type StripState = {
+    bound: boolean;
+    scrollLeft: number;
+    pendingSlug: string | null;
+  };
+
+  const state: StripState = (window as Window & { __albumStrip?: StripState }).__albumStrip ?? {
+    bound: false,
+    scrollLeft: 0,
+    pendingSlug: null,
+  };
+  (window as Window & { __albumStrip?: StripState }).__albumStrip = state;
+
   function currentAlbumSlug() {
     const parts = window.location.pathname.replace(/\/$/, '').split('/').filter(Boolean);
     return parts[0] ?? '';
+  }
+
+  function getStrip() {
+    return document.querySelector<HTMLElement>('.album-strip');
+  }
+
+  function updateActiveSlug(slug: string) {
+    document.querySelectorAll<HTMLAnchorElement>('.album-strip__link').forEach((link) => {
+      const isActive = link.dataset.albumSlug === slug;
+      link.classList.toggle('album-strip__link--active', isActive);
+      if (isActive) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
   }
 
   function scrollStripToLink(link: HTMLElement) {
@@ -51,12 +77,12 @@ const { albums, activeSlug } = Astro.props;
     const max = strip.scrollWidth - strip.clientWidth;
 
     if (index <= 0) {
-      strip.scrollTo({ left: 0, behavior: 'instant' });
+      strip.scrollLeft = 0;
       return;
     }
 
     if (index === links.length - 1) {
-      strip.scrollTo({ left: max, behavior: 'instant' });
+      strip.scrollLeft = max;
       return;
     }
 
@@ -64,39 +90,75 @@ const { albums, activeSlug } = Astro.props;
     const linkRect = link.getBoundingClientRect();
     const target =
       strip.scrollLeft + linkRect.left + linkRect.width / 2 - (stripRect.left + stripRect.width / 2);
-    strip.scrollTo({ left: Math.max(0, Math.min(max, target)), behavior: 'instant' });
+    strip.scrollLeft = Math.max(0, Math.min(max, target));
   }
 
-  function setActiveStripSlug(slug: string) {
-    document.querySelectorAll<HTMLAnchorElement>('.album-strip__link').forEach((link) => {
-      const linkSlug = link.dataset.albumSlug ?? '';
-      const isActive = linkSlug === slug;
-      link.classList.toggle('album-strip__link--active', isActive);
-      if (isActive) {
-        link.setAttribute('aria-current', 'page');
-        scrollStripToLink(link);
-      } else {
-        link.removeAttribute('aria-current');
-      }
+  function isLinkVisible(link: HTMLElement, strip: HTMLElement) {
+    const stripRect = strip.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+    return linkRect.left >= stripRect.left - 4 && linkRect.right <= stripRect.right + 4;
+  }
+
+  function ensureActiveVisible(slug: string) {
+    const strip = getStrip();
+    const link = strip?.querySelector<HTMLElement>(`.album-strip__link[data-album-slug="${slug}"]`);
+    if (!strip || !link || isLinkVisible(link, strip)) return;
+    scrollStripToLink(link);
+  }
+
+  function saveStripScroll() {
+    const strip = getStrip();
+    if (strip) state.scrollLeft = strip.scrollLeft;
+  }
+
+  function restoreStripScroll() {
+    const strip = getStrip();
+    if (strip) strip.scrollLeft = state.scrollLeft;
+  }
+
+  function syncAlbumStrip({ restoreScroll = true, ensureVisible = false } = {}) {
+    const slug = state.pendingSlug ?? currentAlbumSlug();
+    state.pendingSlug = null;
+    updateActiveSlug(slug);
+    if (restoreScroll) restoreStripScroll();
+    if (ensureVisible) ensureActiveVisible(slug);
+    saveStripScroll();
+  }
+
+  function syncAlbumChromeClass() {
+    const chrome = document.getElementById('album-nav');
+    if (!chrome) return;
+    chrome.classList.toggle('album-chrome--tracks', document.body.classList.contains('album-page--tracks'));
+  }
+
+  if (!state.bound) {
+    state.bound = true;
+
+    document.addEventListener('astro:before-swap', saveStripScroll);
+
+    document.addEventListener('astro:after-swap', () => {
+      syncAlbumChromeClass();
+      syncAlbumStrip({ restoreScroll: true, ensureVisible: false });
     });
+
+    document.addEventListener(
+      'click',
+      (e) => {
+        const link = (e.target as Element).closest?.('.album-strip__link');
+        if (!(link instanceof HTMLAnchorElement)) return;
+        const slug = link.dataset.albumSlug;
+        if (!slug) return;
+        state.pendingSlug = slug;
+        updateActiveSlug(slug);
+        scrollStripToLink(link);
+        saveStripScroll();
+      },
+      true,
+    );
+
+    syncAlbumChromeClass();
+    syncAlbumStrip({ restoreScroll: false, ensureVisible: true });
+  } else {
+    syncAlbumChromeClass();
   }
-
-  function syncAlbumStrip() {
-    requestAnimationFrame(() => setActiveStripSlug(currentAlbumSlug()));
-  }
-
-  document.addEventListener(
-    'click',
-    (e) => {
-      const link = (e.target as Element).closest?.('.album-strip__link');
-      if (!(link instanceof HTMLAnchorElement)) return;
-      const slug = link.dataset.albumSlug;
-      if (!slug) return;
-      setActiveStripSlug(slug);
-    },
-    true,
-  );
-
-  syncAlbumStrip();
-  document.addEventListener('astro:after-swap', syncAlbumStrip);
 </script>

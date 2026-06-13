@@ -38,8 +38,9 @@ const title = `${album.name} — Drake Said`;
     class:list={['album-chrome', hasTracks && 'album-chrome--tracks']}
     id="album-nav"
     aria-label="Album navigation"
+    transition:persist="album-chrome"
   >
-    <SiteHeader transition:persist="header-album" />
+    <SiteHeader persist={false} />
     <AlbumStrip albums={navAlbums} activeSlug={album.slug} />
   </section>
 
