@@ -268,8 +268,8 @@ export const albums: AlbumRecord[] = [
     ],
   },
   {
-    slug: 'scary-hours',
-    name: 'Scary Hours',
+    slug: 'some-sexy-songs-4-u',
+    name: '$ome $exy $ongs 4 U',
     cover: '/covers/some-sexy-songs.jpg',
     theme: {
       mode: 'dark',
@@ -281,8 +281,8 @@ export const albums: AlbumRecord[] = [
     fonts: { lyrics: 'Xanh Mono', songTitle: 'Moonscape' },
     quotes: [
       {
-        song: 'God\'s Plan',
-        lines: ['BAD THINGS, IT\'S A LOT OF BAD THINGS', 'THEY WISHIN\' AND WISHIN\''],
+        song: 'Nokia',
+        lines: ['WHO\'S CALLIN\' MY PHONE?', 'WHERE THE FUCK THE FUNCTION?'],
       },
     ],
   },
@@ -391,7 +391,7 @@ export const navAlbumSlugs = [
   'honestly-nevermind',
   'her-loss',
   'for-all-the-dogs',
-  'scary-hours',
+  'some-sexy-songs-4-u',
   'habibti',
   'iceman',
   'maid-of-honour',
