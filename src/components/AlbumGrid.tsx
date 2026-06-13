@@ -10,9 +10,20 @@ type Props = {
 export default function AlbumGrid({ albums }: Props) {
   const gridRef = useRef<HTMLDivElement>(null);
 
+  const setHomeBackground = (color: string) => {
+    gsap.to([document.documentElement, document.body], {
+      backgroundColor: color,
+      duration: 0.55,
+      ease: 'power2.out',
+      overwrite: 'auto',
+    });
+  };
+
   useEffect(() => {
     const items = gridRef.current?.querySelectorAll('.album-grid__item');
     if (!items?.length) return;
+
+    setHomeBackground('#fafafa');
 
     gsap.to(items, {
       opacity: 1,
@@ -27,19 +38,11 @@ export default function AlbumGrid({ albums }: Props) {
   const handleEnter = (img: HTMLImageElement) => {
     const color = averageColorFromImage(img);
     if (!color) return;
-    gsap.to(document.body, {
-      backgroundColor: rgbString(color),
-      duration: 0.55,
-      ease: 'power2.out',
-    });
+    setHomeBackground(rgbString(color));
   };
 
   const handleLeave = () => {
-    gsap.to(document.body, {
-      backgroundColor: '#fafafa',
-      duration: 0.55,
-      ease: 'power2.out',
-    });
+    setHomeBackground('#fafafa');
   };
 
   return (

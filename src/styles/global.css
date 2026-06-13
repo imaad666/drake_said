@@ -217,9 +217,13 @@ body.album-page:not(.album-page--tracks) .album-content {
 }
 
 /* Home grid */
+html:has(body.home-page) {
+  background: #fafafa;
+}
+
 .home-page {
   min-height: 100vh;
-  background: #fafafa !important;
+  background: #fafafa;
   color: #1a1a1a;
 }
 
