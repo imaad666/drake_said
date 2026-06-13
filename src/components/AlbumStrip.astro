@@ -42,13 +42,29 @@ const { albums, activeSlug } = Astro.props;
     return parts[0] ?? '';
   }
 
-  function centerStripOnLink(link: HTMLElement) {
+  function scrollStripToLink(link: HTMLElement) {
     const strip = link.closest('.album-strip') as HTMLElement | null;
     if (!strip) return;
+
+    const links = Array.from(strip.querySelectorAll<HTMLAnchorElement>('.album-strip__link'));
+    const index = links.indexOf(link as HTMLAnchorElement);
+    const max = strip.scrollWidth - strip.clientWidth;
+
+    if (index <= 0) {
+      strip.scrollTo({ left: 0, behavior: 'instant' });
+      return;
+    }
+
+    if (index === links.length - 1) {
+      strip.scrollTo({ left: max, behavior: 'instant' });
+      return;
+    }
+
     const stripRect = strip.getBoundingClientRect();
     const linkRect = link.getBoundingClientRect();
-    const delta = linkRect.left + linkRect.width / 2 - (stripRect.left + stripRect.width / 2);
-    strip.scrollLeft += delta;
+    const target =
+      strip.scrollLeft + linkRect.left + linkRect.width / 2 - (stripRect.left + stripRect.width / 2);
+    strip.scrollTo({ left: Math.max(0, Math.min(max, target)), behavior: 'instant' });
   }
 
   function setActiveStripSlug(slug: string) {
@@ -58,7 +74,7 @@ const { albums, activeSlug } = Astro.props;
       link.classList.toggle('album-strip__link--active', isActive);
       if (isActive) {
         link.setAttribute('aria-current', 'page');
-        centerStripOnLink(link);
+        scrollStripToLink(link);
       } else {
         link.removeAttribute('aria-current');
       }
@@ -66,7 +82,7 @@ const { albums, activeSlug } = Astro.props;
   }
 
   function syncAlbumStrip() {
-    setActiveStripSlug(currentAlbumSlug());
+    requestAnimationFrame(() => setActiveStripSlug(currentAlbumSlug()));
   }
 
   document.addEventListener(
